@@ -13,19 +13,40 @@ services:
       MONGO_INITDB_DATABASE: auth
     volumes:
       - mongo-db-auth:/data/db
-      - ./auth/init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - mongo_auth_db
+      - mongo_auth_adapter
 
   mongo-express:
-    image: mongo-express
-    restart: always
     depends_on:
       - mongo
+    image: mongo-express
+    restart: always
     ports:
       - 8081:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: barbie
       ME_CONFIG_MONGODB_ADMINPASSWORD: barbie
       ME_CONFIG_MONGODB_URL: mongodb://barbie:barbie@mongo:27017/
+    networks:
+      - mongo_auth_db
+
+  auth_server:
+      depends_on:
+        - mongo
+      image: sprc_hw2
+      ports:
+        - 5000:5000
+      restart: always
+      build: ./auth
+      networks:
+        - mongo_auth_adapter
 
 volumes:
   mongo-db-auth:
+
+networks:
+  mongo_auth_db:
+    name: mongo_auth_db
+  mongo_auth_adapter:
+    name: mongo_auth_adapter
