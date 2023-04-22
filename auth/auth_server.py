@@ -9,8 +9,8 @@ CORS(app)
 DATABASE = os.environ.get('MONGO_AUTH_DATABASE')
 COLLECTION = os.environ.get('MONGO_AUTH_COLLECTION')
 client = MongoClient('mongodb://mongo:27017/',
-    username=os.environ.get('MONGO_AUTH_USERNAME'),
-    password=os.environ.get('MONGO_AUTH_PASSWORD')
+    username=os.environ.get('MONGO_INITDB_ROOT_USERNAME'),
+    password=os.environ.get('MONGO_INITDB_ROOT_PASSWORD')
 )
 
 print("Authenthication server connected to database! :)")

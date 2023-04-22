@@ -3,7 +3,6 @@ import requests, hashlib
 url = 'http://127.0.0.1:5000/login'
 # url = 'http://127.0.0.1:5000/register'
 
-# Send POST request
 print(
     requests.post(url, json={
         'username': 'barbie', 
