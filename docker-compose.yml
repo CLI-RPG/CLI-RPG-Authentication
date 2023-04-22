@@ -14,6 +14,7 @@ services:
     networks:
       - mongo_auth_db
       - mongo_auth_adapter
+      - mongo_auth_gui
 
   mongo-express:
     depends_on:
@@ -30,7 +31,7 @@ services:
   auth_server:
       depends_on:
         - mongo
-      image: sprc_hw2
+      image: auth_server
       ports:
         - 5000:5000
       restart: always
@@ -42,9 +43,12 @@ services:
 
 volumes:
   mongo-db-auth:
+  gui:
 
 networks:
   mongo_auth_db:
     name: mongo_auth_db
   mongo_auth_adapter:
     name: mongo_auth_adapter
+  mongo_auth_gui:
+    name: mongo_auth_gui
