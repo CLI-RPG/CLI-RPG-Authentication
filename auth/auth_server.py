@@ -1,13 +1,17 @@
 from pymongo import MongoClient
 from flask import Flask, request, Response, jsonify
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-DATABASE = 'auth'
-COLLECTION = 'client'
-client = MongoClient('mongodb://mongo:27017/', username='barbie', password='barbie') # TODO use env
+DATABASE = os.environ.get('MONGO_AUTH_DATABASE')
+COLLECTION = os.environ.get('MONGO_AUTH_COLLECTION')
+client = MongoClient('mongodb://mongo:27017/',
+    username=os.environ.get('MONGO_AUTH_USERNAME'),
+    password=os.environ.get('MONGO_AUTH_PASSWORD')
+)
 
 print("Authenthication server connected to database! :)")
 
