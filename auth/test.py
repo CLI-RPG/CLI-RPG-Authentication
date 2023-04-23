@@ -1,7 +1,7 @@
 import requests, hashlib
 
-url = 'http://127.0.0.1:5000/login'
-# url = 'http://127.0.0.1:5000/register'
+# url = 'http://127.0.0.1:5000/login'
+url = 'http://127.0.0.1:5000/register'
 
 print(
     requests.post(url, json={

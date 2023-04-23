@@ -29,21 +29,36 @@ services:
       - mongo_auth_db
 
   auth_server:
-      depends_on:
-        - mongo
-      image: auth_server
-      ports:
-        - 5000:5000
-      restart: always
-      build: ./auth
-      env_file:
-        secret.env
-      networks:
-        - mongo_auth_adapter
+    depends_on:
+      - mongo
+    image: auth_server
+    ports:
+      - 5000:5000
+    restart: always
+    build: ./auth
+    env_file:
+      secret.env
+    networks:
+      - mongo_auth_adapter
+
+  pirate_grafana:
+    depends_on:
+      - mongo
+    build:
+      context: ./grafana-mongodb-docker
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+     - ./data:/var/lib/grafana
+     - /var/lib/grafana/plugins
+    ports:
+     - 3000:3000
+    networks:
+      - mongo_auth_gui
+
 
 volumes:
   mongo-db-auth:
-  gui:
 
 networks:
   mongo_auth_db:
