@@ -18,7 +18,7 @@ print("Authenthication server connected to database! :)")
 db = client[DATABASE]
 collection = db[COLLECTION]
 
-@app.route("/register", methods=["POST"])
+@app.route("/auth/register", methods=["POST"])
 def register():
     data = request.json
     username = data.get('username')
@@ -38,7 +38,7 @@ def authenticate_user(username, password):
     res = collection.find_one({'username': username, 'password': password})
     return res != None
 
-@app.route("/login", methods=["POST"])
+@app.route("/auth/login", methods=["POST"])
 def login():
     data = request.json
     username = data.get('username')
