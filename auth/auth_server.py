@@ -36,7 +36,7 @@ def register():
 
 def authenticate_user(username, password):
     res = collection.find_one({'username': username, 'password': password})
-    return res != None
+    return res is not None
 
 @app.route("/auth/login", methods=["POST"])
 def login():
