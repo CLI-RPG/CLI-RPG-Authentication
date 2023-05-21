@@ -1,3 +1,0 @@
-[submodule "grafana-mongodb-docker"]
-	path = grafana-mongodb-docker
-	url = git@github.com:ajeje93/grafana-mongodb-docker.git
